@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script
+      type="module"
+      src="https://unpkg.com/@microsoft/fast-components@1.21.6"
+    ></script>
+    <style>
+      :root {
+        --color-accent: #C01754;
+        --color-text: #fff;
+      }
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      .content-container {
+        padding: 16px;
+      }
+      #button-container {
+        display: flex;
+        padding: 32px;
+        margin: 8px 0;
+        border: 2px dashed var(--color-accent);
+      }
+      .button {
+        margin: 16px;
+      }
+      #message-container {
+          color: var(--color-text);
+      }
+    </style>
+  </head>
+  <body>
+    <fast-design-system-provider use-defaults>
+      <div class="content-container">
+        <div>Button container area:</div>
+        <div onclick="logClick('Button container')" id="button-container">
+          <button onclick="logClick('Native button')" class="button">Native Button</button>
+          <button onclick="logClick('Native button disabled')" disabled class="button">Native Button disabled</button>
+          <fast-button onclick="logClick('Fast Button')" class="button">Fast Button</fast-button>
+          <fast-button onclick="logClick('Fast Button disabled')" disabled class="button">Fast Button disabled</fast-button>
+        </div>
+        <div>
+            <div>Messages:</div>
+            <ul id="messages">
+            </ul>
+            <div>
+                <button onclick="clearMessages()">Clear message</button>
+            </div>
+        </div>
+      </div>
+    </fast-design-system-provider>
+    <script>
+        const messageHost = document.getElementById("messages");
+
+        window.logClick = function(name) {
+            const message = document.createElement("li");
+            message.textContent = `${name} clicked`;
+            messageHost.appendChild(message);
+        }
+
+        window.clearMessages = function(){
+            messageHost.innerHTML = "";
+        }
+    </script>
+  </body>
+</html>
